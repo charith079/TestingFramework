@@ -1,0 +1,1 @@
+Simple alert for UI automation testing

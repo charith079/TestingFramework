@@ -1,0 +1,11 @@
+{
+  "hub_url": "http://localhost:4444/wd/hub",
+  "nodes": 3,
+  "browsers": ["chrome"],
+  "chrome_args": [
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-gpu",
+    "--window-size=1920,1080"
+  ]
+}

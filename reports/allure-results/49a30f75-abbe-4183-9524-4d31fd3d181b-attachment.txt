@@ -1,0 +1,9 @@
+10:42:22 | [32mINFO    [0m | conftest | Driver created
+10:42:22 | [32mINFO    [0m | LoginPage | GET https://react-frontend-api-testing.vercel.app/login
+10:42:22 | [32mINFO    [0m | LoginPage | Logging in as 'admin@example.com'
+10:42:22 | [35mDEBUG   [0m | LoginPage | type   input[type='email'] → 'admin@example.com'
+10:42:23 | [35mDEBUG   [0m | LoginPage | type   input[type='password'] → 'Admin@123'
+10:42:23 | [35mDEBUG   [0m | LoginPage | click  button[type='submit']
+10:42:33 | [32mINFO    [0m | conftest | Admin session ready: admin@example.com
+10:42:33 | [32mINFO    [0m | UsersPage | GET https://react-frontend-api-testing.vercel.app/users
+10:42:35 | [32mINFO    [0m | conftest | Driver quit

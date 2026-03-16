@@ -1,0 +1,6 @@
+2026-03-14 10:42:48 | INFO     | conftest                       | Driver created
+2026-03-14 10:42:48 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:42:49 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:43:00 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_tc01_valid_admin_login_20260314_104300_733391.png
+2026-03-14 10:43:00 | ERROR    | conftest                       | FAILED: test_tc01_valid_admin_login
+2026-03-14 10:43:01 | INFO     | conftest                       | Driver quit

@@ -1,0 +1,4 @@
+2026-03-14 10:43:08 | INFO     | conftest                       | Driver created
+2026-03-14 10:43:08 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:43:09 | INFO     | LoginPage                      | Logging in as 'not-an-email'
+2026-03-14 10:43:15 | INFO     | conftest                       | Driver quit

@@ -1,0 +1,66 @@
+version: '3.8'
+
+# ── Selenium Grid — 1 hub + 3 Chrome nodes ───────────────────────────────────
+#
+# LEARNING NOTE — How Selenium Grid works:
+#   1. The HUB is a router.  Your tests connect to it at port 4444.
+#   2. Each NODE registers itself with the hub and says "I have Chrome".
+#   3. When pytest-xdist spins up 3 workers (-n 3), each worker asks the
+#      hub for a session — the hub routes each one to a different node.
+#   4. Result: 3 tests run in parallel, each in its own real Chrome browser.
+#
+# Start grid:  docker-compose up -d
+# Stop grid:   docker-compose down
+# View status: http://localhost:4444/ui
+
+services:
+
+  selenium-hub:
+    image: selenium/hub:4.21.0
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"     # WebDriver endpoint your tests connect to
+      - "4442:4442"     # Event bus publish port
+      - "4443:4443"     # Event bus subscribe port
+    environment:
+      - SE_SESSION_TIMEOUT=300
+      - SE_SESSION_REQUEST_TIMEOUT=120
+
+  chrome-node-1:
+    image: selenium/node-chrome:4.21.0
+    container_name: chrome-node-1
+    shm_size: 2gb        # Chrome needs shared memory — never omit this
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+
+  chrome-node-2:
+    image: selenium/node-chrome:4.21.0
+    container_name: chrome-node-2
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+
+  chrome-node-3:
+    image: selenium/node-chrome:4.21.0
+    container_name: chrome-node-3
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true

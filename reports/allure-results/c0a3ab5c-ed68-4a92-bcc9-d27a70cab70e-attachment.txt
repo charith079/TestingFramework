@@ -1,0 +1,11 @@
+2026-03-14 10:45:16 | INFO     | conftest                       | Driver created
+2026-03-14 10:45:16 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:45:17 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:45:27 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:45:27 | INFO     | TasksPage                      | GET https://react-frontend-api-testing.vercel.app/tasks
+2026-03-14 10:45:29 | INFO     | TasksPage                      | Clicked edit button on first task
+2026-03-14 10:45:29 | INFO     | TasksPage                      | Status changed → 'in_progress'
+2026-03-14 10:45:30 | INFO     | TasksPage                      | Refreshing page
+2026-03-14 10:45:31 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_tc06_task_status_update_20260314_104531_426174.png
+2026-03-14 10:45:31 | ERROR    | conftest                       | FAILED: test_tc06_task_status_update
+2026-03-14 10:45:31 | INFO     | conftest                       | Driver quit

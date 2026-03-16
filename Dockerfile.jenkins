@@ -1,0 +1,50 @@
+# Jenkins Dockerfile for UI Automation
+FROM python:3.9-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    gnupg \
+    unzip \
+    default-jre \
+    xvfb \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Docker CLI (for Selenium Grid)
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
+    sh get-docker.sh && \
+    rm get-docker.sh
+
+# Install Allure Commandline
+RUN wget -O /tmp/allure.zip https://github.com/allure-framework/allure2/releases/download/2.24.0/allure-2.24.0.zip && \
+    unzip /tmp/allure.zip -d /opt/ && \
+    rm /tmp/allure.zip && \
+    ln -s /opt/allure-2.24.0/bin/allure /usr/bin/allure
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements first for better caching
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application
+COPY . .
+
+# Create necessary directories
+RUN mkdir -p reports/allure-results reports/allure-html logs
+
+# Set permissions
+RUN chmod +x scripts/*.sh 2>/dev/null || true
+
+# Default command
+CMD ["python", "-m", "pytest", "--version"]

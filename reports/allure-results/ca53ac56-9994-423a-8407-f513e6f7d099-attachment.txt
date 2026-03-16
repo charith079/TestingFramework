@@ -1,0 +1,1 @@
+Prompt result: Input: Hello from Selenium!

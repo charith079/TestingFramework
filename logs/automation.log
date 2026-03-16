@@ -1,0 +1,144 @@
+2026-03-14 10:42:22 | INFO     | conftest                       | Driver created
+2026-03-14 10:42:22 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:42:22 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:42:22 | DEBUG    | LoginPage                      | type   input[type='email'] → 'admin@example.com'
+2026-03-14 10:42:23 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Admin@123'
+2026-03-14 10:42:23 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:42:33 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:42:33 | INFO     | UsersPage                      | GET https://react-frontend-api-testing.vercel.app/users
+2026-03-14 10:42:35 | INFO     | conftest                       | Driver quit
+2026-03-14 10:42:36 | INFO     | conftest                       | Driver created
+2026-03-14 10:42:36 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:42:36 | INFO     | LoginPage                      | Logging in as 'user@example.com'
+2026-03-14 10:42:36 | DEBUG    | LoginPage                      | type   input[type='email'] → 'user@example.com'
+2026-03-14 10:42:37 | DEBUG    | LoginPage                      | type   input[type='password'] → 'User@123'
+2026-03-14 10:42:37 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:42:37 | INFO     | conftest                       | User session ready: user@example.com
+2026-03-14 10:42:37 | INFO     | UsersPage                      | GET https://react-frontend-api-testing.vercel.app/users
+2026-03-14 10:42:47 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_tc04_non_admin_access_restriction_20260314_104246_924366.png
+2026-03-14 10:42:47 | ERROR    | conftest                       | FAILED: test_tc04_non_admin_access_restriction
+2026-03-14 10:42:47 | INFO     | conftest                       | Driver quit
+2026-03-14 10:42:48 | INFO     | conftest                       | Driver created
+2026-03-14 10:42:48 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:42:49 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:42:49 | DEBUG    | LoginPage                      | type   input[type='email'] → 'admin@example.com'
+2026-03-14 10:42:50 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Admin@123'
+2026-03-14 10:42:50 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:43:00 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_tc01_valid_admin_login_20260314_104300_733391.png
+2026-03-14 10:43:00 | ERROR    | conftest                       | FAILED: test_tc01_valid_admin_login
+2026-03-14 10:43:01 | INFO     | conftest                       | Driver quit
+2026-03-14 10:43:01 | INFO     | conftest                       | Driver created
+2026-03-14 10:43:01 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:43:02 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:43:02 | DEBUG    | LoginPage                      | type   input[type='email'] → 'admin@example.com'
+2026-03-14 10:43:02 | DEBUG    | LoginPage                      | type   input[type='password'] → 'WrongPass999'
+2026-03-14 10:43:02 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:43:08 | INFO     | conftest                       | Driver quit
+2026-03-14 10:43:08 | INFO     | conftest                       | Driver created
+2026-03-14 10:43:08 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:43:09 | INFO     | LoginPage                      | Logging in as 'not-an-email'
+2026-03-14 10:43:09 | DEBUG    | LoginPage                      | type   input[type='email'] → 'not-an-email'
+2026-03-14 10:43:09 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Admin@123'
+2026-03-14 10:43:09 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:43:15 | INFO     | conftest                       | Driver quit
+2026-03-14 10:43:15 | INFO     | conftest                       | Driver created
+2026-03-14 10:43:15 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:43:16 | INFO     | LoginPage                      | Logging in as ''
+2026-03-14 10:43:16 | DEBUG    | LoginPage                      | type   input[type='email'] → ''
+2026-03-14 10:43:16 | DEBUG    | LoginPage                      | type   input[type='password'] → ''
+2026-03-14 10:43:17 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:43:22 | INFO     | conftest                       | Driver quit
+2026-03-14 10:43:23 | INFO     | conftest                       | Driver created
+2026-03-14 10:43:23 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:43:23 | INFO     | LoginPage                      | Logging in as 'ghost@nowhere.com'
+2026-03-14 10:43:23 | DEBUG    | LoginPage                      | type   input[type='email'] → 'ghost@nowhere.com'
+2026-03-14 10:43:23 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Ghost@123'
+2026-03-14 10:43:24 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:43:29 | INFO     | conftest                       | Driver quit
+2026-03-14 10:43:29 | INFO     | conftest                       | Driver created
+2026-03-14 10:43:29 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:43:30 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:43:30 | DEBUG    | LoginPage                      | type   input[type='email'] → 'admin@example.com'
+2026-03-14 10:43:30 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Admin@123'
+2026-03-14 10:43:30 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:43:41 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:43:41 | INFO     | TestScenariosPage              | GET https://react-frontend-api-testing.vercel.app/test-scenarios
+2026-03-14 10:43:41 | DEBUG    | TestScenariosPage              | click  btn-simple-alert
+2026-03-14 10:43:41 | INFO     | TestScenariosPage              | Alert text: 'Simple alert for UI automation testing'
+2026-03-14 10:43:41 | DEBUG    | TestScenariosPage              | click  btn-confirm
+2026-03-14 10:43:42 | INFO     | TestScenariosPage              | Confirm text: 'Do you confirm this action for testing?' → dismissing
+2026-03-14 10:43:42 | DEBUG    | TestScenariosPage              | click  btn-confirm
+2026-03-14 10:43:42 | INFO     | TestScenariosPage              | Confirm text: 'Do you confirm this action for testing?' → accepting
+2026-03-14 10:43:42 | DEBUG    | TestScenariosPage              | click  btn-prompt
+2026-03-14 10:43:43 | INFO     | TestScenariosPage              | Prompt: 'Enter sample text for prompt testing:' → entering 'Hello from Selenium!'
+2026-03-14 10:43:43 | INFO     | conftest                       | Driver quit
+2026-03-14 10:43:43 | INFO     | conftest                       | Driver created
+2026-03-14 10:43:43 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:43:44 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:43:44 | DEBUG    | LoginPage                      | type   input[type='email'] → 'admin@example.com'
+2026-03-14 10:43:44 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Admin@123'
+2026-03-14 10:43:44 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:43:55 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:43:55 | INFO     | TestScenariosPage              | GET https://react-frontend-api-testing.vercel.app/test-scenarios
+2026-03-14 10:43:55 | INFO     | TestScenariosPage              | Switched INTO iframe
+2026-03-14 10:43:55 | INFO     | TestScenariosPage              | iFrame content: 'Example Domain
+This domain is for use in documentation examples without needing '
+2026-03-14 10:43:55 | INFO     | TestScenariosPage              | Switched back to default content
+2026-03-14 10:43:56 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_tc08_iframe_and_window_handling_20260314_104355_972937.png
+2026-03-14 10:43:56 | ERROR    | conftest                       | FAILED: test_tc08_iframe_and_window_handling
+2026-03-14 10:43:56 | INFO     | conftest                       | Driver quit
+2026-03-14 10:43:56 | INFO     | conftest                       | Driver created
+2026-03-14 10:43:56 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:43:56 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:43:57 | DEBUG    | LoginPage                      | type   input[type='email'] → 'admin@example.com'
+2026-03-14 10:43:57 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Admin@123'
+2026-03-14 10:43:57 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:44:08 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:44:18 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_dashboard_loads_after_login_20260314_104418_296257.png
+2026-03-14 10:44:18 | ERROR    | conftest                       | FAILED: test_dashboard_loads_after_login
+2026-03-14 10:44:18 | INFO     | conftest                       | Driver quit
+2026-03-14 10:44:19 | INFO     | conftest                       | Driver created
+2026-03-14 10:44:19 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:44:19 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:44:19 | DEBUG    | LoginPage                      | type   input[type='email'] → 'admin@example.com'
+2026-03-14 10:44:19 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Admin@123'
+2026-03-14 10:44:19 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:44:30 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:44:30 | INFO     | conftest                       | Driver quit
+2026-03-14 10:44:31 | INFO     | conftest                       | Driver created
+2026-03-14 10:44:31 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:44:31 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:44:31 | DEBUG    | LoginPage                      | type   input[type='email'] → 'admin@example.com'
+2026-03-14 10:44:32 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Admin@123'
+2026-03-14 10:44:32 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:44:42 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:44:53 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_dashboard_logout_20260314_104453_065324.png
+2026-03-14 10:44:53 | ERROR    | conftest                       | FAILED: test_dashboard_logout
+2026-03-14 10:44:53 | INFO     | conftest                       | Driver quit
+2026-03-14 10:44:53 | INFO     | conftest                       | Driver created
+2026-03-14 10:44:53 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:44:54 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:44:54 | DEBUG    | LoginPage                      | type   input[type='email'] → 'admin@example.com'
+2026-03-14 10:44:54 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Admin@123'
+2026-03-14 10:44:54 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:45:05 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:45:05 | INFO     | ProjectsPage                   | GET https://react-frontend-api-testing.vercel.app/projects
+2026-03-14 10:45:05 | INFO     | ProjectsPage                   | Opening New Project modal
+2026-03-14 10:45:05 | DEBUG    | ProjectsPage                   | click  button.btn.btn-primary
+2026-03-14 10:45:16 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_tc05_create_project_20260314_104515_960433.png
+2026-03-14 10:45:16 | ERROR    | conftest                       | FAILED: test_tc05_create_project
+2026-03-14 10:45:16 | INFO     | conftest                       | Driver quit
+2026-03-14 10:45:16 | INFO     | conftest                       | Driver created
+2026-03-14 10:45:16 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:45:17 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:45:17 | DEBUG    | LoginPage                      | type   input[type='email'] → 'admin@example.com'
+2026-03-14 10:45:17 | DEBUG    | LoginPage                      | type   input[type='password'] → 'Admin@123'
+2026-03-14 10:45:17 | DEBUG    | LoginPage                      | click  button[type='submit']
+2026-03-14 10:45:27 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:45:27 | INFO     | TasksPage                      | GET https://react-frontend-api-testing.vercel.app/tasks
+2026-03-14 10:45:29 | INFO     | TasksPage                      | Clicked edit button on first task
+2026-03-14 10:45:29 | INFO     | TasksPage                      | Status changed → 'in_progress'
+2026-03-14 10:45:30 | INFO     | TasksPage                      | Refreshing page
+2026-03-14 10:45:31 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_tc06_task_status_update_20260314_104531_426174.png
+2026-03-14 10:45:31 | ERROR    | conftest                       | FAILED: test_tc06_task_status_update
+2026-03-14 10:45:31 | INFO     | conftest                       | Driver quit

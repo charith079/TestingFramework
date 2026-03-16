@@ -1,0 +1,17 @@
+10:43:29 | [32mINFO    [0m | conftest | Driver created
+10:43:29 | [32mINFO    [0m | LoginPage | GET https://react-frontend-api-testing.vercel.app/login
+10:43:30 | [32mINFO    [0m | LoginPage | Logging in as 'admin@example.com'
+10:43:30 | [35mDEBUG   [0m | LoginPage | type   input[type='email'] → 'admin@example.com'
+10:43:30 | [35mDEBUG   [0m | LoginPage | type   input[type='password'] → 'Admin@123'
+10:43:30 | [35mDEBUG   [0m | LoginPage | click  button[type='submit']
+10:43:41 | [32mINFO    [0m | conftest | Admin session ready: admin@example.com
+10:43:41 | [32mINFO    [0m | TestScenariosPage | GET https://react-frontend-api-testing.vercel.app/test-scenarios
+10:43:41 | [35mDEBUG   [0m | TestScenariosPage | click  btn-simple-alert
+10:43:41 | [32mINFO    [0m | TestScenariosPage | Alert text: 'Simple alert for UI automation testing'
+10:43:41 | [35mDEBUG   [0m | TestScenariosPage | click  btn-confirm
+10:43:42 | [32mINFO    [0m | TestScenariosPage | Confirm text: 'Do you confirm this action for testing?' → dismissing
+10:43:42 | [35mDEBUG   [0m | TestScenariosPage | click  btn-confirm
+10:43:42 | [32mINFO    [0m | TestScenariosPage | Confirm text: 'Do you confirm this action for testing?' → accepting
+10:43:42 | [35mDEBUG   [0m | TestScenariosPage | click  btn-prompt
+10:43:43 | [32mINFO    [0m | TestScenariosPage | Prompt: 'Enter sample text for prompt testing:' → entering 'Hello from Selenium!'
+10:43:43 | [32mINFO    [0m | conftest | Driver quit

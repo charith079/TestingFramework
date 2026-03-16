@@ -1,0 +1,10 @@
+2026-03-14 10:43:29 | INFO     | conftest                       | Driver created
+2026-03-14 10:43:29 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:43:30 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:43:41 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:43:41 | INFO     | TestScenariosPage              | GET https://react-frontend-api-testing.vercel.app/test-scenarios
+2026-03-14 10:43:41 | INFO     | TestScenariosPage              | Alert text: 'Simple alert for UI automation testing'
+2026-03-14 10:43:42 | INFO     | TestScenariosPage              | Confirm text: 'Do you confirm this action for testing?' → dismissing
+2026-03-14 10:43:42 | INFO     | TestScenariosPage              | Confirm text: 'Do you confirm this action for testing?' → accepting
+2026-03-14 10:43:43 | INFO     | TestScenariosPage              | Prompt: 'Enter sample text for prompt testing:' → entering 'Hello from Selenium!'
+2026-03-14 10:43:43 | INFO     | conftest                       | Driver quit

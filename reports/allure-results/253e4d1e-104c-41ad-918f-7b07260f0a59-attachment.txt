@@ -1,0 +1,8 @@
+2026-03-14 10:42:36 | INFO     | conftest                       | Driver created
+2026-03-14 10:42:36 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:42:36 | INFO     | LoginPage                      | Logging in as 'user@example.com'
+2026-03-14 10:42:37 | INFO     | conftest                       | User session ready: user@example.com
+2026-03-14 10:42:37 | INFO     | UsersPage                      | GET https://react-frontend-api-testing.vercel.app/users
+2026-03-14 10:42:47 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_tc04_non_admin_access_restriction_20260314_104246_924366.png
+2026-03-14 10:42:47 | ERROR    | conftest                       | FAILED: test_tc04_non_admin_access_restriction
+2026-03-14 10:42:47 | INFO     | conftest                       | Driver quit

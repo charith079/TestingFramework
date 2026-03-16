@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="14" time="191.242" timestamp="2026-03-14T10:42:20.435561" hostname="charith"><testcase classname="tests.test_access_control" name="test_tc03_admin_users_page_access" time="14.655" /><testcase classname="tests.test_access_control" name="test_tc04_non_admin_access_restriction" time="11.236"><failure message="AssertionError: Expected access-denied alert at https://react-frontend-api-testing.vercel.app/login for non-admin user, but it was not shown.&#10;assert False&#10; +  where False = &lt;bound method UsersPage.is_access_denied_shown of &lt;pages.users_page.UsersPage object at 0x000001EA95775090&gt;&gt;()&#10; +    where &lt;bound method UsersPage.is_access_denied_shown of &lt;pages.users_page.UsersPage object at 0x000001EA95775090&gt;&gt; = &lt;pages.users_page.UsersPage object at 0x000001EA95775090&gt;.is_access_denied_shown">tests\test_access_control.py:87: in test_tc04_non_admin_access_restriction
+    assert users.is_access_denied_shown(), (
+E   AssertionError: Expected access-denied alert at https://react-frontend-api-testing.vercel.app/login for non-admin user, but it was not shown.
+E   assert False
+E    +  where False = &lt;bound method UsersPage.is_access_denied_shown of &lt;pages.users_page.UsersPage object at 0x000001EA95775090&gt;&gt;()
+E    +    where &lt;bound method UsersPage.is_access_denied_shown of &lt;pages.users_page.UsersPage object at 0x000001EA95775090&gt;&gt; = &lt;pages.users_page.UsersPage object at 0x000001EA95775090&gt;.is_access_denied_shown</failure></testcase><testcase classname="tests.test_auth" name="test_tc01_valid_admin_login" time="13.339"><failure message="AssertionError: Dashboard did not load after login. Current URL: https://react-frontend-api-testing.vercel.app/dashboard&#10;assert False&#10; +  where False = &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95775950&gt;&gt;()&#10; +    where &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95775950&gt;&gt; = &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95775950&gt;.is_loaded">tests\test_auth.py:46: in test_tc01_valid_admin_login
+    assert dash.is_loaded(), \
+E   AssertionError: Dashboard did not load after login. Current URL: https://react-frontend-api-testing.vercel.app/dashboard
+E   assert False
+E    +  where False = &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95775950&gt;&gt;()
+E    +    where &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95775950&gt;&gt; = &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95775950&gt;.is_loaded</failure></testcase><testcase classname="tests.test_auth" name="test_tc02_invalid_login_matrix[wrong_password]" time="7.348" /><testcase classname="tests.test_auth" name="test_tc02_invalid_login_matrix[invalid_email_format]" time="6.933" /><testcase classname="tests.test_auth" name="test_tc02_invalid_login_matrix[empty_both]" time="7.182" /><testcase classname="tests.test_auth" name="test_tc02_invalid_login_matrix[nonexistent_user]" time="6.972" /><testcase classname="tests.test_browser_interactions" name="test_tc07_alerts_handling" time="14.006" /><testcase classname="tests.test_browser_interactions" name="test_tc08_iframe_and_window_handling" time="12.497"><failure message="TypeError: selenium.webdriver.remote.webdriver.WebDriver.find_element() argument after * must be an iterable, not type">tests\test_browser_interactions.py:139: in test_tc08_iframe_and_window_handling
+    assert page.is_displayed(page.wait.is_visible.__self__.__class__,
+pages\base_page.py:64: in is_displayed
+    return self.wait.is_visible(locator, timeout)
+utils\wait_utils.py:102: in is_visible
+    self.until_visible(locator, timeout)
+utils\wait_utils.py:39: in until_visible
+    return self._wait(timeout).until(
+venv\Lib\site-packages\selenium\webdriver\support\wait.py:96: in until
+    value = method(self._driver)
+venv\Lib\site-packages\selenium\webdriver\support\expected_conditions.py:156: in _predicate
+    return _element_if_visible(driver.find_element(*locator))
+E   TypeError: selenium.webdriver.remote.webdriver.WebDriver.find_element() argument after * must be an iterable, not type</failure></testcase><testcase classname="tests.test_dashboard" name="test_dashboard_loads_after_login" time="22.172"><failure message="AssertionError: Dashboard heading not found. URL: https://react-frontend-api-testing.vercel.app/dashboard&#10;assert False&#10; +  where False = &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95BA4710&gt;&gt;()&#10; +    where &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95BA4710&gt;&gt; = &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95BA4710&gt;.is_loaded">tests\test_dashboard.py:32: in test_dashboard_loads_after_login
+    assert dash.is_loaded(), (
+E   AssertionError: Dashboard heading not found. URL: https://react-frontend-api-testing.vercel.app/dashboard
+E   assert False
+E    +  where False = &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95BA4710&gt;&gt;()
+E    +    where &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95BA4710&gt;&gt; = &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95BA4710&gt;.is_loaded</failure></testcase><testcase classname="tests.test_dashboard" name="test_dashboard_nav_links_present" time="12.321" /><testcase classname="tests.test_dashboard" name="test_dashboard_logout" time="22.305"><failure message="AssertionError: Dashboard not loaded before logout&#10;assert False&#10; +  where False = &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95737A50&gt;&gt;()&#10; +    where &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95737A50&gt;&gt; = &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95737A50&gt;.is_loaded">tests\test_dashboard.py:84: in test_dashboard_logout
+    assert dash.is_loaded(), "Dashboard not loaded before logout"
+E   AssertionError: Dashboard not loaded before logout
+E   assert False
+E    +  where False = &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95737A50&gt;&gt;()
+E    +    where &lt;bound method DashboardPage.is_loaded of &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95737A50&gt;&gt; = &lt;pages.dashboard_page.DashboardPage object at 0x000001EA95737A50&gt;.is_loaded</failure></testcase><testcase classname="tests.test_projects_tasks" name="test_tc05_create_project" time="22.697"><failure message="selenium.common.exceptions.TimeoutException: Message: &#10;Stacktrace:&#10;#0 0x55f884a99e9a &lt;unknown&gt;&#10;#1 0x55f88478345c &lt;unknown&gt;&#10;#2 0x55f8847cf5b5 &lt;unknown&gt;&#10;#3 0x55f8847cf671 &lt;unknown&gt;&#10;#4 0x55f884813f14 &lt;unknown&gt;&#10;#5 0x55f8847f24dd &lt;unknown&gt;&#10;#6 0x55f8848112cc &lt;unknown&gt;&#10;#7 0x55f8847f2253 &lt;unknown&gt;&#10;#8 0x55f8847c21c7 &lt;unknown&gt;&#10;#9 0x55f8847c2b3e &lt;unknown&gt;&#10;#10 0x55f884a602db &lt;unknown&gt;&#10;#11 0x55f884a64387 &lt;unknown&gt;&#10;#12 0x55f884a4ce0e &lt;unknown&gt;&#10;#13 0x55f884a64e52 &lt;unknown&gt;&#10;#14 0x55f884a317af &lt;unknown&gt;&#10;#15 0x55f884a89188 &lt;unknown&gt;&#10;#16 0x55f884a8935b &lt;unknown&gt;&#10;#17 0x55f884a98fcc &lt;unknown&gt;&#10;#18 0x7f8a65690ac3 &lt;unknown&gt;">tests\test_projects_tasks.py:48: in test_tc05_create_project
+    projects.create_project(name, description)
+pages\projects_page.py:43: in create_project
+    self.fill_project_form(name, description)
+pages\projects_page.py:26: in fill_project_form
+    self.type_text(P.NAME_INPUT, name)
+pages\base_page.py:54: in type_text
+    el = self.wait.until_visible(locator)
+utils\wait_utils.py:39: in until_visible
+    return self._wait(timeout).until(
+venv\Lib\site-packages\selenium\webdriver\support\wait.py:105: in until
+    raise TimeoutException(message, screen, stacktrace)
+E   selenium.common.exceptions.TimeoutException: Message: 
+E   Stacktrace:
+E   #0 0x55f884a99e9a &lt;unknown&gt;
+E   #1 0x55f88478345c &lt;unknown&gt;
+E   #2 0x55f8847cf5b5 &lt;unknown&gt;
+E   #3 0x55f8847cf671 &lt;unknown&gt;
+E   #4 0x55f884813f14 &lt;unknown&gt;
+E   #5 0x55f8847f24dd &lt;unknown&gt;
+E   #6 0x55f8848112cc &lt;unknown&gt;
+E   #7 0x55f8847f2253 &lt;unknown&gt;
+E   #8 0x55f8847c21c7 &lt;unknown&gt;
+E   #9 0x55f8847c2b3e &lt;unknown&gt;
+E   #10 0x55f884a602db &lt;unknown&gt;
+E   #11 0x55f884a64387 &lt;unknown&gt;
+E   #12 0x55f884a4ce0e &lt;unknown&gt;
+E   #13 0x55f884a64e52 &lt;unknown&gt;
+E   #14 0x55f884a317af &lt;unknown&gt;
+E   #15 0x55f884a89188 &lt;unknown&gt;
+E   #16 0x55f884a8935b &lt;unknown&gt;
+E   #17 0x55f884a98fcc &lt;unknown&gt;
+E   #18 0x7f8a65690ac3 &lt;unknown&gt;</failure></testcase><testcase classname="tests.test_projects_tasks" name="test_tc06_task_status_update" time="15.334"><failure message="AssertionError: Status after refresh 'API Automation Suite' does not match expected 'in_progress'&#10;assert ('in progress' in 'api automation suite' or 'in_progress' in 'api automation suite')&#10; +  where 'in progress' = &lt;built-in method replace of str object at 0x000001EA95C60A70&gt;('_', ' ')&#10; +    where &lt;built-in method replace of str object at 0x000001EA95C60A70&gt; = 'in_progress'.replace&#10; +      where 'in_progress' = &lt;built-in method lower of str object at 0x000001EA95C61EF0&gt;()&#10; +        where &lt;built-in method lower of str object at 0x000001EA95C61EF0&gt; = 'in_progress'.lower&#10; +  and   'api automation suite' = &lt;built-in method replace of str object at 0x000001EA95C603F0&gt;('_', ' ')&#10; +    where &lt;built-in method replace of str object at 0x000001EA95C603F0&gt; = 'api automation suite'.replace&#10; +      where 'api automation suite' = &lt;built-in method lower of str object at 0x000001EA95C612B0&gt;()&#10; +        where &lt;built-in method lower of str object at 0x000001EA95C612B0&gt; = 'API Automation Suite'.lower&#10; +  and   'in_progress' = &lt;built-in method lower of str object at 0x000001EA95C61EF0&gt;()&#10; +    where &lt;built-in method lower of str object at 0x000001EA95C61EF0&gt; = 'in_progress'.lower&#10; +  and   'api automation suite' = &lt;built-in method lower of str object at 0x000001EA95C612B0&gt;()&#10; +    where &lt;built-in method lower of str object at 0x000001EA95C612B0&gt; = 'API Automation Suite'.lower">tests\test_projects_tasks.py:109: in test_tc06_task_status_update
+    assert new_status.lower().replace("_", " ") in status_after_refresh.lower().replace("_", " ") \
+E   AssertionError: Status after refresh 'API Automation Suite' does not match expected 'in_progress'
+E   assert ('in progress' in 'api automation suite' or 'in_progress' in 'api automation suite')
+E    +  where 'in progress' = &lt;built-in method replace of str object at 0x000001EA95C60A70&gt;('_', ' ')
+E    +    where &lt;built-in method replace of str object at 0x000001EA95C60A70&gt; = 'in_progress'.replace
+E    +      where 'in_progress' = &lt;built-in method lower of str object at 0x000001EA95C61EF0&gt;()
+E    +        where &lt;built-in method lower of str object at 0x000001EA95C61EF0&gt; = 'in_progress'.lower
+E    +  and   'api automation suite' = &lt;built-in method replace of str object at 0x000001EA95C603F0&gt;('_', ' ')
+E    +    where &lt;built-in method replace of str object at 0x000001EA95C603F0&gt; = 'api automation suite'.replace
+E    +      where 'api automation suite' = &lt;built-in method lower of str object at 0x000001EA95C612B0&gt;()
+E    +        where &lt;built-in method lower of str object at 0x000001EA95C612B0&gt; = 'API Automation Suite'.lower
+E    +  and   'in_progress' = &lt;built-in method lower of str object at 0x000001EA95C61EF0&gt;()
+E    +    where &lt;built-in method lower of str object at 0x000001EA95C61EF0&gt; = 'in_progress'.lower
+E    +  and   'api automation suite' = &lt;built-in method lower of str object at 0x000001EA95C612B0&gt;()
+E    +    where &lt;built-in method lower of str object at 0x000001EA95C612B0&gt; = 'API Automation Suite'.lower</failure></testcase></testsuite></testsuites>

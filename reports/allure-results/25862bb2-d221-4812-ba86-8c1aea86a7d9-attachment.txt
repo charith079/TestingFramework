@@ -1,0 +1,13 @@
+10:43:43 | [32mINFO    [0m | conftest | Driver created
+10:43:43 | [32mINFO    [0m | LoginPage | GET https://react-frontend-api-testing.vercel.app/login
+10:43:44 | [32mINFO    [0m | LoginPage | Logging in as 'admin@example.com'
+10:43:44 | [35mDEBUG   [0m | LoginPage | type   input[type='email'] → 'admin@example.com'
+10:43:44 | [35mDEBUG   [0m | LoginPage | type   input[type='password'] → 'Admin@123'
+10:43:44 | [35mDEBUG   [0m | LoginPage | click  button[type='submit']
+10:43:55 | [32mINFO    [0m | conftest | Admin session ready: admin@example.com
+10:43:55 | [32mINFO    [0m | TestScenariosPage | GET https://react-frontend-api-testing.vercel.app/test-scenarios
+10:43:55 | [32mINFO    [0m | TestScenariosPage | Switched INTO iframe
+10:43:55 | [32mINFO    [0m | TestScenariosPage | iFrame content: 'Example Domain
+This domain is for use in documentation examples without needing '
+10:43:55 | [32mINFO    [0m | TestScenariosPage | Switched back to default content
+10:43:56 | [32mINFO    [0m | conftest | Driver quit

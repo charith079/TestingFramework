@@ -1,0 +1,5 @@
+2026-03-14 10:44:19 | INFO     | conftest                       | Driver created
+2026-03-14 10:44:19 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:44:19 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:44:30 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:44:30 | INFO     | conftest                       | Driver quit

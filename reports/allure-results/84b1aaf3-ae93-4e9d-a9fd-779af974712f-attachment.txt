@@ -1,0 +1,12 @@
+2026-03-14 10:43:43 | INFO     | conftest                       | Driver created
+2026-03-14 10:43:43 | INFO     | LoginPage                      | GET https://react-frontend-api-testing.vercel.app/login
+2026-03-14 10:43:44 | INFO     | LoginPage                      | Logging in as 'admin@example.com'
+2026-03-14 10:43:55 | INFO     | conftest                       | Admin session ready: admin@example.com
+2026-03-14 10:43:55 | INFO     | TestScenariosPage              | GET https://react-frontend-api-testing.vercel.app/test-scenarios
+2026-03-14 10:43:55 | INFO     | TestScenariosPage              | Switched INTO iframe
+2026-03-14 10:43:55 | INFO     | TestScenariosPage              | iFrame content: 'Example Domain
+This domain is for use in documentation examples without needing '
+2026-03-14 10:43:55 | INFO     | TestScenariosPage              | Switched back to default content
+2026-03-14 10:43:56 | INFO     | utils.screenshot_utils         | Screenshot → FAIL_test_tc08_iframe_and_window_handling_20260314_104355_972937.png
+2026-03-14 10:43:56 | ERROR    | conftest                       | FAILED: test_tc08_iframe_and_window_handling
+2026-03-14 10:43:56 | INFO     | conftest                       | Driver quit

@@ -1,0 +1,42 @@
+{
+  "admin": {
+    "email": "admin@example.com",
+    "password": "Admin@123"
+  },
+  "normal_user": {
+    "email": "user@example.com",
+    "password": "User@123"
+  },
+  "invalid_login_matrix": [
+    {
+      "id": "wrong_password",
+      "email": "admin@example.com",
+      "password": "WrongPass999",
+      "desc": "valid email, wrong password"
+    },
+    {
+      "id": "invalid_email_format",
+      "email": "not-an-email",
+      "password": "Admin@123",
+      "desc": "malformed email address"
+    },
+    {
+      "id": "empty_both",
+      "email": "",
+      "password": "",
+      "desc": "both fields empty"
+    },
+    {
+      "id": "nonexistent_user",
+      "email": "ghost@nowhere.com",
+      "password": "Ghost@123",
+      "desc": "email does not exist"
+    }
+  ],
+  "new_project": {
+    "name": "Selenium Automation Project",
+    "description": "Created automatically by the test framework"
+  },
+  "prompt_input": "Hello from Selenium!",
+  "task_status_new": "in_progress"
+}
