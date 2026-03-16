@@ -54,25 +54,25 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/charith079/TestingFramework.git'
                 
                 // Create necessary directories
-                sh 'mkdir -p ${REPORTS_DIR} logs'
+                bat 'mkdir %REPORTS_DIR% 2>nul & mkdir logs 2>nul'
             }
         }
         
         stage('Setup Python Environment') {
             steps {
                 echo 'Setting up Python environment...'
-                sh '''
-                    python3 --version
-                    pip3 --version
+                bat '''
+                    python --version
+                    pip --version
                     
-                    # Create virtual environment if it doesn't exist
-                    if [ ! -d "${VENV_DIR}" ]; then
-                        echo "Creating Python virtual environment..."
-                        python3 -m venv ${VENV_DIR}
-                    fi
+                    REM Create virtual environment if it doesn't exist
+                    if not exist "%VENV_DIR%" (
+                        echo Creating Python virtual environment...
+                        python -m venv %VENV_DIR%
+                    )
                     
-                    # Activate virtual environment and install dependencies
-                    source ${VENV_DIR}/bin/activate
+                    REM Activate virtual environment and install dependencies
+                    call %VENV_DIR%\\Scripts\\activate.bat
                     pip install --upgrade pip
                     pip install -r requirements.txt
                     pip install allure-commandline
@@ -86,20 +86,20 @@ pipeline {
             }
             steps {
                 echo 'Starting Selenium Grid...'
-                sh '''
-                    # Stop any existing grid
-                    docker-compose down || true
+                bat '''
+                    REM Stop any existing grid
+                    docker-compose down || exit /b 0
                     
-                    # Start fresh grid
+                    REM Start fresh grid
                     docker-compose up -d
                     
-                    # Wait for grid to be ready
-                    echo "Waiting for Selenium Grid to be ready..."
-                    sleep 20
+                    REM Wait for grid to be ready
+                    echo Waiting for Selenium Grid to be ready...
+                    timeout /t 20 /nobreak
                     
-                    # Check grid status
-                    curl -f http://localhost:4444/status || exit 1
-                    echo "Selenium Grid is ready!"
+                    REM Check grid status
+                    curl -f http://localhost:4444/status || exit /b 1
+                    echo Selenium Grid is ready!
                 '''
             }
         }
@@ -109,23 +109,23 @@ pipeline {
                 script {
                     def pytestCommand = buildPytestCommand()
                     
-                    sh """
-                        source ${VENV_DIR}/bin/activate
+                    bat """
+                        call %VENV_DIR%\\Scripts\\activate.bat
                         
-                        # Set environment variables
-                        export EXECUTION_MODE=${params.EXECUTION_MODE}
-                        export BROWSER=${params.BROWSER}
-                        export HEADLESS=${params.HEADLESS}
-                        export BASE_URL=${BASE_URL}
-                        export DEFAULT_WAIT=${DEFAULT_WAIT}
-                        export GRID_URL=${GRID_URL}
-                        export ADMIN_EMAIL=${ADMIN_EMAIL}
-                        export ADMIN_PASSWORD=${ADMIN_PASSWORD}
-                        export USER_EMAIL=${USER_EMAIL}
-                        export USER_PASSWORD=${USER_PASSWORD}
+                        REM Set environment variables
+                        set EXECUTION_MODE=${params.EXECUTION_MODE}
+                        set BROWSER=${params.BROWSER}
+                        set HEADLESS=${params.HEADLESS}
+                        set BASE_URL=${BASE_URL}
+                        set DEFAULT_WAIT=${DEFAULT_WAIT}
+                        set GRID_URL=${GRID_URL}
+                        set ADMIN_EMAIL=${ADMIN_EMAIL}
+                        set ADMIN_PASSWORD=${ADMIN_PASSWORD}
+                        set USER_EMAIL=${USER_EMAIL}
+                        set USER_PASSWORD=${USER_PASSWORD}
                         
-                        # Run tests
-                        echo "Executing: ${pytestCommand}"
+                        REM Run tests
+                        echo Executing: ${pytestCommand}
                         ${pytestCommand}
                     """
                 }
@@ -141,17 +141,22 @@ pipeline {
         
         stage('Generate Allure Report') {
             steps {
-                sh '''
-                    source ${VENV_DIR}/bin/activate
+                bat '''
+                    call %VENV_DIR%\\Scripts\\activate.bat
                     
-                    # Generate Allure HTML report
-                    if [ -d "reports/allure-results" ] && [ "$(ls -A reports/allure-results)" ]; then
-                        echo "Generating Allure report..."
-                        allure generate reports/allure-results -o reports/allure-html --clean
-                        echo "Allure report generated successfully!"
-                    else
-                        echo "No Allure results found, skipping report generation"
-                    fi
+                    REM Generate Allure HTML report
+                    if exist "reports\\allure-results" (
+                        dir "reports\\allure-results" /b | findstr /r "." > nul
+                        if not errorlevel 1 (
+                            echo Generating Allure report...
+                            allure generate reports\\allure-results -o reports\\allure-html --clean
+                            echo Allure report generated successfully!
+                        ) else (
+                            echo No Allure results found, skipping report generation
+                        )
+                    ) else (
+                        echo Allure results directory not found, skipping report generation
+                    )
                 '''
             }
             post {
@@ -175,7 +180,7 @@ pipeline {
                 script {
                     if (params.EXECUTION_MODE == 'remote') {
                         echo 'Stopping Selenium Grid...'
-                        sh 'docker-compose down || true'
+                        bat 'docker-compose down || exit /b 0'
                     }
                 }
             }
