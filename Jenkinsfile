@@ -1,6 +1,9 @@
 pipeline {
     agent any
-    
+    tools {
+        python 'Python312'
+    }
+
     parameters {
         choice(
             name: 'EXECUTION_MODE',
