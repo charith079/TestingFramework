@@ -54,7 +54,10 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/charith079/TestingFramework.git'
                 
                 // Create necessary directories
-                bat 'mkdir %REPORTS_DIR% 2>nul & mkdir logs 2>nul'
+                bat '''
+                    if not exist "reports" mkdir reports
+                    if not exist "logs" mkdir logs
+                '''
             }
         }
         
