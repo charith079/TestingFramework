@@ -65,20 +65,20 @@ pipeline {
             steps {
                 echo 'Setting up Python environment...'
                 bat '''
-                    python --version
-                    pip --version
+                    REM Try different Python installations
+                    python --version 2>nul || py --version 2>nul || C:\\Python39\\python.exe --version 2>nul || C:\\Python310\\python.exe --version 2>nul || C:\\Python311\\python.exe --version 2>nul || echo "Python not found"
                     
                     REM Create virtual environment if it doesn't exist
-                    if not exist "%VENV_DIR%" (
+                    if not exist "venv" (
                         echo Creating Python virtual environment...
-                        python -m venv %VENV_DIR%
+                        python -m venv venv || py -m venv venv || C:\\Python39\\python.exe -m venv venv || C:\\Python310\\python.exe -m venv venv || C:\\Python311\\python.exe -m venv venv
                     )
                     
                     REM Activate virtual environment and install dependencies
-                    call %VENV_DIR%\\Scripts\\activate.bat
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
-                    pip install allure-commandline
+                    call venv\\Scripts\\activate.bat
+                    python -m pip install --upgrade pip
+                    python -m pip install -r requirements.txt
+                    python -m pip install allure-commandline
                 '''
             }
         }
