@@ -5,7 +5,7 @@ pipeline {
         choice(
             name: 'EXECUTION_MODE',
             choices: ['local', 'remote'],
-            description: 'Test execution mode'
+            description: 'Test execution mode: local (single browser) or remote (Selenium Grid)'
         )
         choice(
             name: 'BROWSER',
@@ -15,42 +15,26 @@ pipeline {
         booleanParam(
             name: 'HEADLESS',
             defaultValue: true,
-            description: 'Run tests in headless mode'
+            description: 'Run tests in headless mode (no browser UI)'
         )
         choice(
             name: 'TEST_SCOPE',
             choices: ['all', 'smoke', 'regression', 'auth', 'access', 'projects', 'browser'],
             description: 'Test scope to execute'
         )
-        booleanParam(
-            name: 'GENERATE_ALLURE_REPORT',
-            defaultValue: true,
-            description: 'Generate Allure HTML report'
-        )
-        booleanParam(
-            name: 'CLEAN_WORKSPACE',
-            defaultValue: true,
-            description: 'Clean workspace before build'
-        )
     }
     
     environment {
-        PYTHON_VERSION = '3.9'
+        // Project directories
         VENV_DIR = 'venv'
-        REQUIREMENTS_FILE = 'requirements.txt'
         REPORTS_DIR = 'reports'
-        ALLURE_RESULTS_DIR = 'reports/allure-results'
-        ALLURE_HTML_DIR = 'reports/allure-html'
-        JUNIT_XML = 'reports/junit.xml'
         
         // Test configuration
         BASE_URL = 'https://react-frontend-api-testing.vercel.app'
         DEFAULT_WAIT = '10'
-        
-        // Selenium Grid configuration
         GRID_URL = 'http://localhost:4444/wd/hub'
         
-        // Test credentials (should be secured in real Jenkins)
+        // Test credentials
         ADMIN_EMAIL = 'admin@example.com'
         ADMIN_PASSWORD = 'Admin@123'
         USER_EMAIL = 'user@example.com'
@@ -59,67 +43,40 @@ pipeline {
     
     options {
         buildDiscarder(logRotator(numToKeepStr: '10'))
-        timeout(time: 60, unit: 'MINUTES')
+        timeout(time: 45, unit: 'MINUTES')
         timestamps()
     }
     
     stages {
-        stage('Preparation') {
+        stage('Checkout from GitHub') {
             steps {
-                script {
-                    if (params.CLEAN_WORKSPACE) {
-                        cleanWs()
-                    }
-                }
-                
-                echo "Starting UI Automation Pipeline"
-                echo "Execution Mode: ${params.EXECUTION_MODE}"
-                echo "Browser: ${params.BROWSER}"
-                echo "Headless: ${params.HEADLESS}"
-                echo "Test Scope: ${params.TEST_SCOPE}"
-                
-                // Git checkout (assuming Jenkins is configured with git repo)
-                checkout scm
+                echo 'Cloning repository from GitHub...'
+                git branch: 'master', url: 'https://github.com/charith079/TestingFramework.git'
                 
                 // Create necessary directories
-                sh '''
-                    mkdir -p ${REPORTS_DIR}
-                    mkdir -p ${ALLURE_RESULTS_DIR}
-                    mkdir -p logs
-                '''
+                sh 'mkdir -p ${REPORTS_DIR} logs'
             }
         }
         
         stage('Setup Python Environment') {
             steps {
-                script {
-                    // Check if Python is available
-                    sh '''
-                        python --version
-                        pip --version
-                    '''
+                echo 'Setting up Python environment...'
+                sh '''
+                    python3 --version
+                    pip3 --version
                     
-                    // Create virtual environment if it doesn't exist
-                    sh '''
-                        if [ ! -d "${VENV_DIR}" ]; then
-                            echo "Creating Python virtual environment..."
-                            python -m venv ${VENV_DIR}
-                        fi
-                        
-                        # Activate virtual environment
-                        source ${VENV_DIR}/bin/activate
-                        
-                        # Upgrade pip
-                        pip install --upgrade pip
-                        
-                        # Install requirements
-                        echo "Installing Python dependencies..."
-                        pip install -r ${REQUIREMENTS_FILE}
-                        
-                        # Install additional tools for CI
-                        pip install allure-commandline
-                    '''
-                }
+                    # Create virtual environment if it doesn't exist
+                    if [ ! -d "${VENV_DIR}" ]; then
+                        echo "Creating Python virtual environment..."
+                        python3 -m venv ${VENV_DIR}
+                    fi
+                    
+                    # Activate virtual environment and install dependencies
+                    source ${VENV_DIR}/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
+                    pip install allure-commandline
+                '''
             }
         }
         
@@ -128,28 +85,22 @@ pipeline {
                 expression { params.EXECUTION_MODE == 'remote' }
             }
             steps {
-                script {
-                    try {
-                        echo "Starting Selenium Grid..."
-                        sh '''
-                            # Stop any existing grid
-                            docker-compose down || true
-                            
-                            # Start fresh grid
-                            docker-compose up -d
-                            
-                            # Wait for grid to be ready
-                            echo "Waiting for Selenium Grid to be ready..."
-                            sleep 20
-                            
-                            # Check grid status
-                            curl -f http://localhost:4444/status || exit 1
-                            echo "Selenium Grid is ready!"
-                        '''
-                    } catch (Exception e) {
-                        error "Failed to start Selenium Grid: ${e.getMessage()}"
-                    }
-                }
+                echo 'Starting Selenium Grid...'
+                sh '''
+                    # Stop any existing grid
+                    docker-compose down || true
+                    
+                    # Start fresh grid
+                    docker-compose up -d
+                    
+                    # Wait for grid to be ready
+                    echo "Waiting for Selenium Grid to be ready..."
+                    sleep 20
+                    
+                    # Check grid status
+                    curl -f http://localhost:4444/status || exit 1
+                    echo "Selenium Grid is ready!"
+                '''
             }
         }
         
@@ -181,34 +132,27 @@ pipeline {
             }
             post {
                 always {
-                    // Archive test results and logs
+                    // Archive test results
                     archiveArtifacts artifacts: 'reports/**/*, logs/**/*', allowEmptyArchive: true
-                    
-                    // Publish JUnit results
                     publishTestResults testResultsPattern: 'reports/junit.xml', allowEmptyResults: true
                 }
             }
         }
         
         stage('Generate Allure Report') {
-            when {
-                expression { params.GENERATE_ALLURE_REPORT }
-            }
             steps {
-                script {
-                    sh """
-                        source ${VENV_DIR}/bin/activate
-                        
-                        # Generate Allure HTML report
-                        if [ -d "${ALLURE_RESULTS_DIR}" ] && [ "\$(ls -A ${ALLURE_RESULTS_DIR})" ]; then
-                            echo "Generating Allure report..."
-                            allure generate ${ALLURE_RESULTS_DIR} -o ${ALLURE_HTML_DIR} --clean
-                            echo "Allure report generated successfully!"
-                        else
-                            echo "No Allure results found, skipping report generation"
-                        fi
-                    """
-                }
+                sh '''
+                    source ${VENV_DIR}/bin/activate
+                    
+                    # Generate Allure HTML report
+                    if [ -d "reports/allure-results" ] && [ "$(ls -A reports/allure-results)" ]; then
+                        echo "Generating Allure report..."
+                        allure generate reports/allure-results -o reports/allure-html --clean
+                        echo "Allure report generated successfully!"
+                    else
+                        echo "No Allure results found, skipping report generation"
+                    fi
+                '''
             }
             post {
                 success {
@@ -230,7 +174,7 @@ pipeline {
             steps {
                 script {
                     if (params.EXECUTION_MODE == 'remote') {
-                        echo "Stopping Selenium Grid..."
+                        echo 'Stopping Selenium Grid...'
                         sh 'docker-compose down || true'
                     }
                 }
@@ -241,40 +185,20 @@ pipeline {
     post {
         always {
             echo "Pipeline completed with status: ${currentBuild.result ?: 'SUCCESS'}"
-            
-            // Send notifications (customize based on your needs)
-            script {
-                if (currentBuild.result == 'FAILURE') {
-                    echo "NOTIFICATION: Build failed! Check logs for details."
-                    // Add email/Slack notification here if needed
-                } else if (currentBuild.result == 'UNSTABLE') {
-                    echo "NOTIFICATION: Build completed with test failures."
-                } else {
-                    echo "NOTIFICATION: Build completed successfully!"
-                }
-            }
         }
         
         success {
-            echo "✅ All tests passed successfully!"
-            
-            // Display summary
-            script {
-                if (params.GENERATE_ALLURE_REPORT && fileExists('reports/allure-html/index.html')) {
-                    echo "📊 Allure Report: ${BUILD_URL}Allure_Report/"
-                }
-            }
+            echo '✅ All tests passed successfully!'
+            echo '📊 Allure Report available in build artifacts'
         }
         
         failure {
-            echo "❌ Pipeline failed! Check the logs above for details."
-            
-            // Archive additional debugging information
+            echo '❌ Pipeline failed! Check the logs above for details.'
             archiveArtifacts artifacts: '**/*.log, **/*.png, **/*.jpg', allowEmptyArchive: true
         }
         
         unstable {
-            echo "⚠️ Tests completed with failures. Review the test report."
+            echo '⚠️ Tests completed with failures. Review the test report.'
         }
     }
 }
@@ -314,8 +238,8 @@ def buildPytestCommand() {
         command += " -n 3 --dist=loadscope"
     }
     
-    // Add output options (already in pytest.ini but ensuring consistency)
-    command += " --alluredir=${ALLURE_RESULTS_DIR} --junitxml=${JUNIT_XML} -v"
+    // Add output options
+    command += " --alluredir=reports/allure-results --junitxml=reports/junit.xml -v"
     
     return command
 }
