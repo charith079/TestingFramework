@@ -134,7 +134,7 @@ pipeline {
             post {
                 always {
                     archiveArtifacts artifacts: 'reports/**/*, logs/**/*', allowEmptyArchive: true
-                    publishTestResults testResultsPattern: 'reports/junit.xml', allowEmptyResults: true
+                    junit 'reports/junit.xml'
                 }
             }
         }
