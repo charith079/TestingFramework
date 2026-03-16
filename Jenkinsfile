@@ -25,9 +25,9 @@ pipeline {
     }
 
     environment {
-        // Python location - properly quoted for spaces
+        // Python location - use single quotes to avoid double quoting
         PYTHON_HOME = 'C:\\Users\\charith reddy\\AppData\\Local\\Programs\\Python\\Python312'
-        PYTHON = "\"${PYTHON_HOME}\\python.exe\""
+        PYTHON = '"C:\\Users\\charith reddy\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"'
 
         // Project directories
         VENV_DIR = 'venv'
@@ -69,8 +69,8 @@ pipeline {
             steps {
                 bat """
                 echo Using Python from:
-                "${PYTHON}"
-                "${PYTHON}" --version
+                ${PYTHON}
+                ${PYTHON} --version
                 """
             }
         }
@@ -80,7 +80,7 @@ pipeline {
                 echo 'Creating virtual environment...'
                 bat """
                 if not exist "%VENV_DIR%" (
-                    "${PYTHON}" -m venv %VENV_DIR%
+                    ${PYTHON} -m venv %VENV_DIR%
                 )
 
                 call %VENV_DIR%\\Scripts\\activate.bat
